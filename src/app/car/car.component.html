@@ -1,2 +1,6 @@
-<p>car works!</p>
-<button>Test Car</button>
+<div class="row my-2">
+  <div class="col-md-4" *ngFor="let car of cars">
+    <h1>{{car.year}}</h1>
+    <h1>{{car.make}}</h1>
+  </div>
+</div>
