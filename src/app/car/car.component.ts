@@ -9,7 +9,7 @@ export class CarComponent implements OnInit {
 
   constructor() { }
 
-  cars =  [{year: 1993, make: "Mercedes Diesel"}, {year: 2021, make: "Mazda"}, {year: 2019, make: "Civic"}]
+  cars: {year: number, make: string} [] =  [{year: 1993, make: "Mercedes Diesel"}, {year: 2021, make: "Mazda"}, {year: 2019, make: "Civic"}, {year: 2011, make: "Focus"}]
 
   ngOnInit(): void {
   }
