@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { api } from '../AxiosService';
+import { Car } from '../Models/Car';
+import { carsService } from '../Services/CarsService';
 
 @Component({
   selector: 'app-car',
@@ -7,11 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarComponent implements OnInit {
 
-  constructor() { }
+  constructor() {}
 
-  cars: {year: number, make: string} [] =  [{year: 1993, make: "Mercedes Diesel"}, {year: 2021, make: "Mazda"}, {year: 2019, make: "Civic"}, {year: 2011, make: "Focus"}]
+   cars: Car [] = []
+
+   async getCars(){
+    try {
+    this.cars = await carsService.getCars()
+    } catch (error) {
+      console.error(error)
+    }
+   }
 
   ngOnInit(): void {
+    this.getCars()
   }
 
 }
