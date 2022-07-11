@@ -1,8 +1,15 @@
 import { api } from "../AxiosService"
+import { CarDetailsPageComponent } from "../car-details-page/car-details-page.component";
+import { CarComponent } from "../car/car.component";
 import { Car } from "../Models/Car"
 
 
 class CarsService{
+
+  async deleteCar(carId: string) {
+    await api.delete(`api/cars/${carId}`)
+
+  }
 
   async getCars(){
     const res = await api.get('api/cars')

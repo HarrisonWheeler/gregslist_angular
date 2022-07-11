@@ -22,6 +22,16 @@ export class CarComponent implements OnInit {
     }
    }
 
+   async deleteCar(carId: string){
+    try {
+        await carsService.deleteCar(carId)
+        this.cars = this.cars.filter(c => c.id !== carId)
+        console.log("cars after delete", this.cars);
+      } catch (error) {
+        console.error(error)
+      }
+   }
+
   ngOnInit(): void {
     this.getCars()
   }
