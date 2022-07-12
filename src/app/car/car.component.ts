@@ -1,36 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { api } from '../AxiosService';
+import { CarsService } from '../cars.service';
 import { Car } from '../Models/Car';
-import { carsService } from '../Services/CarsService';
 
 @Component({
   selector: 'app-car',
   templateUrl: './car.component.html',
-  styleUrls: ['./car.component.css']
+  styleUrls: ['./car.component.css'],
+  // This 'registers' the cars service to be injected into this component
+  providers: [CarsService]
 })
 export class CarComponent implements OnInit {
 
-  constructor() {}
+  constructor(private service: CarsService) {
+    this.carsService = service
+  }
 
-   cars: Car [] = []
+  carsService: CarsService = new CarsService()
+  cars: Car[] = []
 
-   async getCars(){
+  async getCars(): Promise<void> {
     try {
-    this.cars = await carsService.getCars()
+      const cars: Car[] = await this.carsService.getCars()
+      this.cars = cars
     } catch (error) {
       console.error(error)
     }
-   }
+  }
 
-   async deleteCar(carId: string){
+  async deleteCar(carId: string) {
     try {
-        await carsService.deleteCar(carId)
-        this.cars = this.cars.filter(c => c.id !== carId)
-        console.log("cars after delete", this.cars);
-      } catch (error) {
-        console.error(error)
-      }
-   }
+      const cars: Car[] = await this.carsService.deleteCar(carId)
+      this.cars = cars
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   ngOnInit(): void {
     this.getCars()
